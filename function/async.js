@@ -1,4 +1,4 @@
-/*//with promise word
+//with promise word
 
 async function fun() {
     return "Hello";
@@ -17,7 +17,7 @@ arrowFunname=async () => {
     console.log("Kec");
 }
 fun();
-arrowFunname();*/
+arrowFunname();
 
 //with await
 
