@@ -19,7 +19,7 @@ arrowFunname=async () => {
 fun();
 arrowFunname();
 
-//with await
+//with await key word
 
 async function fun() {
     setTimeout(()=>{
@@ -37,3 +37,4 @@ arrowFunname=async () => {
 }
 fun();
 arrowFunname();
+
