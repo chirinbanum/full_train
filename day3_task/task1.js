@@ -1,6 +1,6 @@
 obj1={
-    "firstname":"jhon",
-    "lastname":"doe",
+    "firstname":"Chirin",
+    "lastname":"banu",
     "age":20
 }
 // Task 1a) Using forEach (by iterating over keys directly)
