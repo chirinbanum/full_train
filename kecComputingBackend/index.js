@@ -5,7 +5,7 @@ var User=require('./models/users')
 var app = express()
 const PORT = 3001;
 app.use(express.json())
-mdb.connect("mongodb://localhost:27017/")
+mdb.connect("mongodb://localhost:27017/kec")
 .then(() => {
     console.log("MongoDB connection successful");
 })
@@ -43,7 +43,7 @@ app.post('/signup',(req,res)=>{
 })
 app.get('/getsignup',async(req,res)=>{
     try{
-        var allSignUpRecords=User.find()
+        var allSignUpRecords=await User.find()
         res.json(allSignUpRecords)
         console.log("All Records are fetched");
         
