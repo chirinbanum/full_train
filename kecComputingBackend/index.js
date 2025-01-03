@@ -2,7 +2,7 @@ var express = require('express')
 var path = require('path')
 var mdb = require('mongoose')
 var User=require('./models/users')
-var app = express()
+var app = express()     
 const PORT = 3001;
 app.use(express.json())
 mdb.connect("mongodb://localhost:27017/kec")
@@ -24,15 +24,17 @@ app.get("/static", (req, res) => {
     
 })
 app.post('/signup',(req,res)=>{
-    console.log(req.body);
-    var {firstName,lastName,email}=req.body;
-    console.log(firstName,lastName,email);
+    //var {firstName,lastName,email}=req.body;
+    var {firstName,lastName,email,password}=req.body;
+    console.log(firstName,lastName,email,password);
     try{
-        var newUser=new User({
-            firstName:firstName,
-            lastName:lastName,
-            email:email
-        })
+        //var newUser=new User({
+          //  firstName:firstName,
+           // lastName:lastName,
+           // email:email
+        //})
+        var newUser=new User(req.body)
+        console.log(req.body.password);
         newUser.save()
         console.log("User Added successfully")
         res.status(200).send("User add successfully")
@@ -53,6 +55,29 @@ app.get('/getsignup',async(req,res)=>{
         res.send(err)
     }
 })
+app.post('/login',async(req,res)=>{
+    var {email,password}=req.body;
+    try{
+        var existingUser=await User.findOne({email:email})
+        if(existingUser){
+            if(existingUser.password!=password){
+                res.json({message:"Invalid credentials",isLoggedIn:false})
+            }
+            else{
+            res.json({message:"Login Successful",isLoggedIn:true})
+            }
+
+        }
+        else{
+            res.json({message:"Login Failed",isLoggedIn:false})
+        }
+    }
+    catch(err){
+        console.log("Login failed");
+    }
+      
+})
+
 app.listen(PORT, () => { 
     console.log(`Backend sever started\nUrl:http://localhost:${PORT}`);
 
